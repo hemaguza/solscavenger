@@ -1,0 +1,5 @@
+{
+  "solanaNetwork": "mainnet-beta",
+  "solanaRpc": "https://api.mainnet-beta.solana.com",
+  "apiBaseUrl": "https://api.solscavenger.app"
+}

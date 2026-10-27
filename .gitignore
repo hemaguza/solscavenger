@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Build Outputs
+dist/
+dist-ssr/
+*.local
+target/
+target_corrupt/
+*.jar
+*.war
+*.ear
+*.tar
+*.tar.gz
+
+# Environment & Local Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+!core-api/src/test/resources/*.pem
+**/k8s/01-secret.yaml
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor & OS files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db

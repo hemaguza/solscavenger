@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Fondo circular -->
+  <circle cx="100" cy="100" r="95" fill="#E8F5E9" stroke="#4CAF50" stroke-width="3"/>
+
+  <!-- Contenedor de basura -->
+  <rect x="100" y="110" width="60" height="60" rx="5" fill="#78909C" stroke="#455A64" stroke-width="3"/>
+  <!-- Tapa del contenedor -->
+  <rect x="95" y="100" width="70" height="15" rx="4" fill="#607D8B" stroke="#455A64" stroke-width="3"/>
+  <!-- Asa de la tapa -->
+  <rect x="120" y="93" width="20" height="10" rx="4" fill="#546E7A" stroke="#455A64" stroke-width="2.5"/>
+  <!-- Rayas del contenedor -->
+  <line x1="115" y1="130" x2="115" y2="160" stroke="#546E7A" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="130" y1="130" x2="130" y2="160" stroke="#546E7A" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="145" y1="130" x2="145" y2="160" stroke="#546E7A" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Basura saliendo -->
+  <ellipse cx="135" cy="100" rx="8" ry="5" fill="#FFE082" transform="rotate(-30 135 100)"/>
+  <rect x="145" y="95" width="6" height="10" rx="2" fill="#EF9A9A" transform="rotate(20 148 100)"/>
+  <ellipse cx="120" cy="98" rx="5" ry="4" fill="#A5D6A7" transform="rotate(-15 120 98)"/>
+
+  <!-- Cuerpo del mapache -->
+  <ellipse cx="65" cy="140" rx="40" ry="35" fill="#78909C"/>
+  <!-- Barriga clara -->
+  <ellipse cx="60" cy="148" rx="22" ry="20" fill="#B0BEC5"/>
+
+  <!-- Cabeza del mapache -->
+  <ellipse cx="75" cy="90" rx="42" ry="38" fill="#90A4AE"/>
+
+  <!-- Orejas -->
+  <ellipse cx="48" cy="58" rx="14" ry="18" fill="#78909C" transform="rotate(-15 48 58)"/>
+  <ellipse cx="48" cy="60" rx="8" ry="12" fill="#B0BEC5" transform="rotate(-15 48 60)"/>
+  <ellipse cx="100" cy="58" rx="14" ry="18" fill="#78909C" transform="rotate(15 100 58)"/>
+  <ellipse cx="100" cy="60" rx="8" ry="12" fill="#B0BEC5" transform="rotate(15 100 60)"/>
+
+  <!-- Máscara facial del mapache -->
+  <path d="M35 85 Q50 72 75 78 Q100 72 115 85 Q110 95 100 100 Q85 95 75 100 Q65 95 50 100 Q40 95 35 85Z" fill="#37474F"/>
+
+  <!-- Ojos -->
+  <circle cx="58" cy="88" r="10" fill="white"/>
+  <circle cx="92" cy="88" r="10" fill="white"/>
+  <circle cx="60" cy="88" r="5" fill="#263238"/>
+  <circle cx="94" cy="88" r="5" fill="#263238"/>
+  <circle cx="62" cy="86" r="2" fill="white"/>
+  <circle cx="96" cy="86" r="2" fill="white"/>
+
+  <!-- Hocico -->
+  <ellipse cx="75" cy="105" rx="12" ry="8" fill="#CFD8DC"/>
+  <ellipse cx="75" cy="103" rx="5" ry="3.5" fill="#37474F"/>
+
+  <!-- Patas delanteras apoyadas en el contenedor -->
+  <ellipse cx="100" cy="105" rx="8" ry="6" fill="#78909C" transform="rotate(30 100 105)"/>
+  <ellipse cx="115" cy="108" rx="8" ry="6" fill="#78909C" transform="rotate(-20 115 108)"/>
+
+  <!-- Cola rayada -->
+  <path d="M25 155 Q10 140 15 120 Q18 110 25 115 Q30 120 28 135 Q26 148 35 155Z" fill="#78909C"/>
+  <path d="M22 130 Q25 125 28 130" stroke="#37474F" stroke-width="3" fill="none"/>
+  <path d="M20 140 Q23 135 27 140" stroke="#37474F" stroke-width="3" fill="none"/>
+  <path d="M18 125 Q21 120 24 125" stroke="#37474F" stroke-width="3" fill="none"/>
+
+  <!-- Línea de suelo -->
+  <line x1="20" y1="170" x2="180" y2="170" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 4"/>
+</svg>
