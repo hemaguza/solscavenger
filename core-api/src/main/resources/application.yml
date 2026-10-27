@@ -3,7 +3,7 @@ quarkus:
     port: ${HTTP_PORT:8080}
     cors:
       enabled: true
-      origins: ${CORS_ORIGINS:https://solscavenger.app,https://www.solscavenger.app,https://admin.neihec.com,http://localhost:4200,http://localhost:4201,http://localhost:5173}
+      origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:5173}
       headers: "accept, authorization, content-type, x-requested-with, cf-connecting-ip, cf-ipcountry"
       methods: "GET, POST, PUT, DELETE, OPTIONS, HEAD"
       access-control-allow-credentials: true
@@ -11,9 +11,9 @@ quarkus:
   datasource:
     db-kind: postgresql
     username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:admin}
+    password: ${DB_PASSWORD:postgres}
     reactive:
-      url: postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:solscavenger}
+      url: postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
 
   hibernate-orm:
     database:
@@ -21,13 +21,13 @@ quarkus:
     log:
       sql: ${DB_SQL_LOG:false}
 
-# MicroProfile & SmallRye JWT Configuration (Production mounts keys from Secret at /deployments/keys/)
+# MicroProfile & SmallRye JWT Configuration
 mp:
   jwt:
     verify:
       publickey:
-        location: ${JWT_PUBLIC_KEY_LOCATION:https://auth.neihec.com/neihec-security/oauth2/jwks}
-      issuer: ${JWT_ISSUER:https://auth.neihec.com/neihec-security}
+        location: ${JWT_PUBLIC_KEY_LOCATION:NONE}
+      issuer: ${JWT_ISSUER:NONE}
 
 smallrye:
   jwt:
@@ -35,17 +35,17 @@ smallrye:
       relax-issuer-validation: ${JWT_RELAX_ISSUER:true}
     sign:
       key:
-        location: ${JWT_PRIVATE_KEY_LOCATION:/deployments/keys/privateKey.pem}
+        location: ${JWT_PRIVATE_KEY_LOCATION:NONE}
 
 # Solana & Business Logic Configuration
 solscavenger:
   solana:
     rpc-url: ${SOLANA_RPC_URL:https://api.mainnet-beta.solana.com}
     network: ${SOLANA_NETWORK:mainnet-beta}
-    treasury-wallet: ${TREASURY_WALLET:DzYNSew4aLiXK6KyqNJ4udXjWpE5kCipkzpbRMYuNVvk}
+    treasury-wallet: ${TREASURY_WALLET:11111111111111111111111111111111}
     fee-percentage: ${FEE_PERCENTAGE:0.025}
   security:
-    cors-origins: ${CORS_ORIGINS:https://solscavenger.app,https://www.solscavenger.app,https://admin.neihec.com,http://localhost:4200,http://localhost:5173}
+    cors-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:5173}
     jwt-expiration-minutes: ${JWT_EXPIRATION_MINUTES:20}
     nonce-ttl-minutes: ${NONCE_TTL_MINUTES:5}
     rate-limit:
@@ -53,18 +53,8 @@ solscavenger:
       scan-per-minute: ${RATE_LIMIT_SCAN:5}
       reclaim-per-minute: ${RATE_LIMIT_RECLAIM:5}
 
-# Test Profile (Permite ejecutar pruebas unitarias sin requerir base de datos activa ni llaves externas)
+# Test Profile
 "%test":
-  mp:
-    jwt:
-      verify:
-        publickey:
-          location: testPublicKey.pem
-  smallrye:
-    jwt:
-      sign:
-        key:
-          location: testPrivateKey.pem
   quarkus:
     hibernate-orm:
       enabled: false
