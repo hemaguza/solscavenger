@@ -9,7 +9,7 @@ export const Footer: FC = () => {
       <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex flex-col sm:flex-row items-center gap-2">
           <span className="font-medium text-white">{t.footer.rights}</span>
-          <span className="hidden sm:inline text-gray-500">â€¢</span>
+          <span className="hidden sm:inline text-gray-500">•</span>
           <a
             href="https://neihec.com"
             target="_blank"
@@ -18,7 +18,7 @@ export const Footer: FC = () => {
           >
             neihec.com
           </a>
-          <span className="hidden sm:inline text-gray-500">â€¢</span>
+          <span className="hidden sm:inline text-gray-500">•</span>
           <span className="text-[#94A3B8]">{t.footer.builtOn}</span>
         </div>
 
