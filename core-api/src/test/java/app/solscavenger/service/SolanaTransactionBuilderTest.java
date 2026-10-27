@@ -14,7 +14,7 @@ public class SolanaTransactionBuilderTest {
     private final SolanaTransactionBuilder builder = new SolanaTransactionBuilder();
 
     // Standard valid 32-byte Base58 addresses
-    private static final String WALLET = "6bFhLqZgQ7d4k6eZ3m2vN9j7K1yX8wP5tS4rA2qD1uC3";
+    private static final String WALLET = "4Nd1mBQtrMJVYVfKf2PJy9NZqda883jLFb5cg5vdKSnR";
     private static final String TREASURY = "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU";
     private static final String BLOCKHASH = "EkSnNWid2cvwEVnPx9aZaWuYSpMm2S4iaPXJ3mtE2g5a";
 

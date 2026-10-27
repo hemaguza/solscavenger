@@ -13,7 +13,7 @@ public class RateLimiterServiceTest {
 
     @Test
     public void testRateLimitingEnforcement() {
-        String testIp = "192.168.1.100";
+        String testIp = "10.0.0.1";
 
         // Nonce limit is 10 per minute
         for (int i = 0; i < 10; i++) {
@@ -26,7 +26,7 @@ public class RateLimiterServiceTest {
         Assertions.assertFalse(eleventhAllowed, "11th request must be blocked by rate limiter");
 
         // A different IP should still be allowed
-        String otherIp = "192.168.1.101";
+        String otherIp = "10.0.0.2";
         boolean otherAllowed = rateLimiterService.isAllowed("nonce", otherIp);
         Assertions.assertTrue(otherAllowed, "Different IP should have its own rate quota");
     }
