@@ -32,14 +32,11 @@ solscavenger/
 ├── frontend/             # High-performance React 19 + TypeScript + Vite dApp
 │   ├── src/              # UI components, Solana Wallet Adapter, Tailwind CSS
 │   ├── public/           # Static assets, runtime config
-│   ├── k8s/              # Kubernetes production manifests & Nginx CSP
-│   └── Dockerfile        # Multi-stage production container build
+│   └── nginx.conf        # Production Nginx CSP & headers
 │
 └── core-api/             # Reactive High-Throughput Quarkus Backend
     ├── src/main/java/    # Mutiny Reactive REST resources, Solana transaction builder
-    ├── src/main/resources# Application profiles, JWT validation
-    ├── k8s/              # Kubernetes deployments, ConfigMaps, Secrets
-    └── Dockerfile        # Optimized Red Hat UBI JVM container
+    └── src/main/resources# Application profiles, JWT validation
 ```
 
 ---
@@ -85,3 +82,4 @@ The backend API will start at `http://localhost:8080`.
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
+
