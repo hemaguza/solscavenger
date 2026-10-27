@@ -56,7 +56,4 @@
   <path d="M22 130 Q25 125 28 130" stroke="#37474F" stroke-width="3" fill="none"/>
   <path d="M20 140 Q23 135 27 140" stroke="#37474F" stroke-width="3" fill="none"/>
   <path d="M18 125 Q21 120 24 125" stroke="#37474F" stroke-width="3" fill="none"/>
-
-  <!-- Línea de suelo -->
-  <line x1="20" y1="170" x2="180" y2="170" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 4"/>
 </svg>
