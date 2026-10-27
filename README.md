@@ -1,4 +1,4 @@
-# SolScavenger by Neihec
+# SolScavenger
 
 > **Secure, non-custodial Solana rent optimizer & dormant token account reclaimer.**  
 > Built for the Solana ecosystem to reclaim locked SOL from empty, inactive SPL Token and Token-2022 accounts via atomic transactions.
@@ -31,12 +31,11 @@ SolScavenger is designed with zero-trust and complete transparency:
 solscavenger/
 ├── frontend/             # High-performance React 19 + TypeScript + Vite dApp
 │   ├── src/              # UI components, Solana Wallet Adapter, Tailwind CSS
-│   ├── public/           # Static assets, runtime config
-│   └── nginx.conf        # Production Nginx CSP & headers
+│   └── public/           # Static assets, runtime config
 │
 └── core-api/             # Reactive High-Throughput Quarkus Backend
     ├── src/main/java/    # Mutiny Reactive REST resources, Solana transaction builder
-    └── src/main/resources# Application profiles, JWT validation
+    └── src/main/resources# Application profiles, configuration
 ```
 
 ---
@@ -45,8 +44,6 @@ solscavenger/
 
 - **Frontend:** React 19, TypeScript, Vite, Tailwind CSS v4, `@solana/web3.js`, `@solana/wallet-adapter`.
 - **Backend:** Java 21, Quarkus 3.x, Hibernate Reactive with Panache, Mutiny, SmallRye JWT, PostgreSQL.
-- **Infrastructure:** Kubernetes, Nginx (Alpine), Containerd, Caddy reverse proxy, Cloudflare Zero Trust.
-- **Solana Cluster Integration:** Dedicated Helius RPC cluster with automated fallbacks.
 
 ---
 
@@ -56,7 +53,6 @@ solscavenger/
 
 - Node.js 20+ & npm
 - Java 21 (JDK) & Maven / `./mvnw`
-- Docker Desktop or Containerd
 
 ### 1. Running the Frontend
 
@@ -82,4 +78,3 @@ The backend API will start at `http://localhost:8080`.
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
-
