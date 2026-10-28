@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.Logger;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,6 +22,8 @@ import java.util.Map;
 
 @ApplicationScoped
 public class SolanaRpcService {
+
+    private static final Logger LOG = Logger.getLogger(SolanaRpcService.class);
 
     @ConfigProperty(name = "solscavenger.solana.rpc-url")
     String rpcUrl;
@@ -331,9 +334,11 @@ public class SolanaRpcService {
                         }
                     }
                 }
+            } else {
+                LOG.warnf("Solana RPC returned status %d for program %s: %s", response.statusCode(), programId, response.body());
             }
         } catch (Exception e) {
-            // Log or ignore if empty / network error on specific program
+            LOG.warnf("Failed to query Solana RPC for program %s: %s", programId, e.getMessage());
         }
     }
 }
