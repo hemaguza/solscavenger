@@ -19,10 +19,11 @@ import { MascotIcon } from './MascotIcon';
 interface ScannerViewProps {
   summary: ScanSummary;
   onRescan: () => void;
+  isScanning?: boolean;
   onSuccess: (result: ReclaimResult) => void;
 }
 
-export const ScannerView: FC<ScannerViewProps> = ({ summary, onRescan, onSuccess }) => {
+export const ScannerView: FC<ScannerViewProps> = ({ summary, onRescan, isScanning = false, onSuccess }) => {
   const { t } = useLanguage();
   const { publicKey, signTransaction } = useWallet();
 
@@ -139,29 +140,30 @@ export const ScannerView: FC<ScannerViewProps> = ({ summary, onRescan, onSuccess
 
   if (summary.accounts.length === 0) {
     return (
-      <div className="max-w-3xl mx-auto my-12 p-10 rounded-3xl bg-[#181922] border border-[#272833] text-center">
-        <div className="w-20 h-20 mx-auto rounded-3xl bg-[#202230] flex items-center justify-center text-4xl mb-6 shadow-inner">
+      <div className="max-w-3xl mx-4 sm:mx-auto my-8 sm:my-12 p-6 sm:p-10 rounded-3xl bg-[#181922] border border-[#272833] text-center shadow-xl">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-3xl bg-[#202230] flex items-center justify-center text-3xl sm:text-4xl mb-4 sm:mb-6 shadow-inner">
           🧼
         </div>
-        <h3 className="text-2xl font-bold text-white mb-3">{t.scanner.noDormantFoundTitle}</h3>
-        <p className="text-sm text-[#94A3B8] max-w-md mx-auto mb-8 leading-relaxed">
+        <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">{t.scanner.noDormantFoundTitle}</h3>
+        <p className="text-xs sm:text-sm text-[#94A3B8] max-w-md mx-auto mb-6 sm:mb-8 leading-relaxed">
           {t.scanner.noDormantFoundDesc}
         </p>
         <button
           onClick={onRescan}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#272836] hover:bg-[#343547] text-white text-sm font-semibold transition-all cursor-pointer"
+          disabled={isScanning}
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#272836] hover:bg-[#343547] text-white text-sm font-semibold transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
         >
-          <RefreshCw className="w-4 h-4" />
-          {t.scanner.scanAgain}
+          <RefreshCw className={`w-4 h-4 ${isScanning ? 'animate-spin text-[#00FFA3]' : ''}`} />
+          <span>{isScanning ? (t.hero.ctaScanning || 'Escaneando...') : t.scanner.scanAgain}</span>
         </button>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto my-8 px-4 sm:px-6">
+    <div className="max-w-4xl mx-auto my-6 sm:my-8 px-3 sm:px-6">
       {/* Summary Box */}
-      <div className="rounded-3xl bg-gradient-to-b from-[#1c1d29] to-[#161720] border border-[#2d2f40] p-6 sm:p-8 shadow-2xl relative overflow-hidden mb-8">
+      <div className="rounded-3xl bg-gradient-to-b from-[#1c1d29] to-[#161720] border border-[#2d2f40] p-4 sm:p-8 shadow-2xl relative overflow-hidden mb-6 sm:mb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-[#2d2f40]">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#00FFA3] tracking-wider mb-1">
@@ -174,10 +176,11 @@ export const ScannerView: FC<ScannerViewProps> = ({ summary, onRescan, onSuccess
           </div>
           <button
             onClick={onRescan}
-            className="self-start sm:self-auto flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#252737] hover:bg-[#313347] text-xs font-bold text-[#94A3B8] hover:text-white transition-all cursor-pointer"
+            disabled={isScanning}
+            className="self-start sm:self-auto flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#252737] hover:bg-[#313347] text-xs font-bold text-[#94A3B8] hover:text-white transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <RefreshCw className="w-3.5 h-3.5" />
-            {t.scanner.scanAgain}
+            <RefreshCw className={`w-3.5 h-3.5 ${isScanning ? 'animate-spin text-[#00FFA3]' : ''}`} />
+            <span>{isScanning ? (t.hero.ctaScanning || 'Escaneando...') : t.scanner.scanAgain}</span>
           </button>
         </div>
 

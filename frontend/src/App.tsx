@@ -59,6 +59,7 @@ export default function App() {
           <ScannerView
             summary={scanSummary}
             onRescan={handleScan}
+            isScanning={isScanning}
             onSuccess={handleSuccess}
           />
         ) : (

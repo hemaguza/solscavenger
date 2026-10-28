@@ -12,9 +12,7 @@ let currentConfig: AppConfig | null = null;
  */
 export async function loadAppConfig(): Promise<AppConfig> {
   try {
-    const res = await fetch(`/config.json?t=${Date.now()}`, {
-      headers: { 'Cache-Control': 'no-cache' },
-    });
+    const res = await fetch(`/config.json?t=${Date.now()}`);
     if (!res.ok) {
       throw new Error(`HTTP ${res.status} al solicitar /config.json`);
     }
@@ -28,9 +26,7 @@ export async function loadAppConfig(): Promise<AppConfig> {
 
     // Sincronización viva con el backend / consola de administración
     try {
-      const liveRes = await fetch(`${data.apiBaseUrl}/api/v1/solana/config`, {
-        headers: { 'Cache-Control': 'no-cache' },
-      });
+      const liveRes = await fetch(`${data.apiBaseUrl}/api/v1/solana/config?t=${Date.now()}`);
       if (liveRes.ok) {
         const liveData = await liveRes.json();
         if (liveData.solanaNetwork === 'mainnet-beta' || liveData.solanaNetwork === 'devnet') {

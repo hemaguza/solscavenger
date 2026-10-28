@@ -26,7 +26,7 @@ export const Navbar: FC = () => {
               Sol<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00FFA3] to-[#9945FF]">Scavenger</span>
             </span>
             <div className="flex items-center gap-1.5">
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#94A3B8]">
+              <span className="text-[10px] uppercase font-mono tracking-widest text-[#94A3B8] hidden sm:inline">
                 {t.nav.tagline}
               </span>
               <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-md bg-indigo-950/80 text-indigo-300 border border-indigo-700/60 font-bold tracking-tight">
@@ -98,7 +98,7 @@ export const Navbar: FC = () => {
             <span className={language === 'es' ? 'text-[#00FFA3] font-bold' : 'text-[#64748B]'}>ES</span>
           </button>
 
-          <WalletMultiButton className="!bg-gradient-to-r !from-[#9945FF] !to-[#00FFA3] !text-black !font-bold !rounded-full !py-2 !px-5 hover:!opacity-90" />
+          <WalletMultiButton className="!bg-gradient-to-r !from-[#9945FF] !to-[#00FFA3] !text-black !font-bold !rounded-full !py-2 !px-3 sm:!px-5 !text-xs sm:!text-sm hover:!opacity-90" />
         </div>
       </div>
     </header>
