@@ -39,6 +39,14 @@ export const Footer: FC = () => {
           >
             GitHub
           </a>
+          <a
+            href="https://x.com/SolScavengerApp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[#00FFA3] transition-colors flex items-center gap-1"
+          >
+            X
+          </a>
           <a href="#how-it-works" className="hover:text-white transition-colors">
             {t.nav.howItWorks}
           </a>

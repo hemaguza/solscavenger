@@ -17,7 +17,7 @@ export const SuccessModal: FC<SuccessModalProps> = ({ result, onClose }) => {
   const solscanUrl = `https://solscan.io/tx/${result.signature}${clusterParam}`;
   
   const tweetText = encodeURIComponent(
-    `Just cleaned up my @solana wallet with @SolScavenger and reclaimed +${result.userSolReceived.toFixed(4)} SOL! Reclaim your locked rent at solscavenger.app`
+    `Just cleaned up my @solana wallet with @SolScavengerApp and reclaimed +${result.userSolReceived.toFixed(4)} SOL! Reclaim your locked rent at solscavenger.app`
   );
   const twitterUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
 
