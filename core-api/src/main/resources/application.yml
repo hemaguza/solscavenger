@@ -41,6 +41,7 @@ smallrye:
 solscavenger:
   solana:
     rpc-url: ${SOLANA_RPC_URL:https://api.mainnet-beta.solana.com}
+    rpc-origin: ${SOLANA_RPC_ORIGIN:}
     network: ${SOLANA_NETWORK:mainnet-beta}
     treasury-wallet: ${TREASURY_WALLET:11111111111111111111111111111111}
     fee-percentage: ${FEE_PERCENTAGE:0.025}

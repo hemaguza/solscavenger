@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.Logger;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -18,18 +19,37 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @ApplicationScoped
 public class SolanaRpcService {
 
+    private static final Logger LOG = Logger.getLogger(SolanaRpcService.class);
+
     @ConfigProperty(name = "solscavenger.solana.rpc-url")
     String rpcUrl;
+
+    @ConfigProperty(name = "solscavenger.solana.rpc-origin")
+    Optional<String> rpcOrigin;
 
     @ConfigProperty(name = "solscavenger.solana.treasury-wallet")
     String treasuryWallet;
 
     @ConfigProperty(name = "solscavenger.solana.fee-percentage", defaultValue = "0.025")
     double feePercentage;
+
+    private HttpRequest.Builder createRpcRequestBuilder(Duration timeout) {
+        HttpRequest.Builder builder = HttpRequest.newBuilder()
+                .uri(URI.create(getRpcUrl()))
+                .header("Content-Type", "application/json")
+                .timeout(timeout);
+
+        if (rpcOrigin != null && rpcOrigin.isPresent() && !rpcOrigin.get().isBlank()) {
+            builder.header("Origin", rpcOrigin.get().trim());
+        }
+
+        return builder;
+    }
 
     @Inject
     PlatformConfigService platformConfigService;
@@ -69,10 +89,7 @@ public class SolanaRpcService {
                 "params", List.of(Map.of("commitment", "confirmed"))
         );
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(getRpcUrl()))
-                .header("Content-Type", "application/json")
-                .timeout(Duration.ofSeconds(10))
+        HttpRequest request = createRpcRequestBuilder(Duration.ofSeconds(10))
                 .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(rpcPayload)))
                 .build();
 
@@ -115,10 +132,7 @@ public class SolanaRpcService {
                 )
         );
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(getRpcUrl()))
-                .header("Content-Type", "application/json")
-                .timeout(Duration.ofSeconds(25))
+        HttpRequest request = createRpcRequestBuilder(Duration.ofSeconds(25))
                 .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(rpcPayload)))
                 .build();
 
@@ -160,10 +174,7 @@ public class SolanaRpcService {
                         )
                 );
 
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(getRpcUrl()))
-                        .header("Content-Type", "application/json")
-                        .timeout(Duration.ofSeconds(6))
+                HttpRequest request = createRpcRequestBuilder(Duration.ofSeconds(6))
                         .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(rpcPayload)))
                         .build();
 
@@ -199,10 +210,7 @@ public class SolanaRpcService {
                     "method", "getMinimumBalanceForRentExemption",
                     "params", List.of(dataSize)
             );
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(getRpcUrl()))
-                    .header("Content-Type", "application/json")
-                    .timeout(Duration.ofSeconds(6))
+            HttpRequest request = createRpcRequestBuilder(Duration.ofSeconds(6))
                     .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writeValueAsString(rpcPayload)))
                     .build();
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -271,10 +279,7 @@ public class SolanaRpcService {
 
             String requestBody = objectMapper.writeValueAsString(rpcPayload);
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(getRpcUrl()))
-                    .header("Content-Type", "application/json")
-                    .timeout(Duration.ofSeconds(15))
+            HttpRequest request = createRpcRequestBuilder(Duration.ofSeconds(15))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
 
@@ -331,9 +336,11 @@ public class SolanaRpcService {
                         }
                     }
                 }
+            } else {
+                LOG.warnf("Solana RPC returned status %d for program %s: %s", response.statusCode(), programId, response.body());
             }
         } catch (Exception e) {
-            // Log or ignore if empty / network error on specific program
+            LOG.warnf("Failed to query Solana RPC for program %s: %s", programId, e.getMessage());
         }
     }
 }
