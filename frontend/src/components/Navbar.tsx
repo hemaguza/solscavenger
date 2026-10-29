@@ -1,11 +1,15 @@
 import type { FC } from 'react';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useLanguage } from '../context/LanguageContext';
+import { useMobileWallet } from '../context/MobileWalletContext';
 import { MascotIcon } from './MascotIcon';
-import { Globe, Shield, HelpCircle, Terminal, ExternalLink } from 'lucide-react';
+import { Globe, Shield, HelpCircle, Terminal, ExternalLink, Wallet } from 'lucide-react';
 
 export const Navbar: FC = () => {
   const { language, setLanguage, t } = useLanguage();
+  const { connected } = useWallet();
+  const { shouldUseMobileFlow, openMobileModal } = useMobileWallet();
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'es' : 'en');
@@ -98,7 +102,19 @@ export const Navbar: FC = () => {
             <span className={language === 'es' ? 'text-[#00FFA3] font-bold' : 'text-[#64748B]'}>ES</span>
           </button>
 
-          <WalletMultiButton className="!bg-gradient-to-r !from-[#9945FF] !to-[#00FFA3] !text-black !font-bold !rounded-full !py-2 !px-3 sm:!px-5 !text-xs sm:!text-sm hover:!opacity-90" />
+          {connected ? (
+            <WalletMultiButton className="!bg-gradient-to-r !from-[#9945FF] !to-[#00FFA3] !text-black !font-bold !rounded-full !py-2 !px-3 sm:!px-5 !text-xs sm:!text-sm hover:!opacity-90" />
+          ) : shouldUseMobileFlow ? (
+            <button
+              onClick={openMobileModal}
+              className="bg-gradient-to-r from-[#9945FF] to-[#00FFA3] text-black font-bold rounded-full py-2 px-3 sm:px-5 text-xs sm:text-sm hover:opacity-90 flex items-center gap-1.5 cursor-pointer shadow-lg shadow-[#00FFA3]/10"
+            >
+              <Wallet className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-black" />
+              <span>{t.nav.connectWallet}</span>
+            </button>
+          ) : (
+            <WalletMultiButton className="!bg-gradient-to-r !from-[#9945FF] !to-[#00FFA3] !text-black !font-bold !rounded-full !py-2 !px-3 sm:!px-5 !text-xs sm:!text-sm hover:!opacity-90" />
+          )}
         </div>
       </div>
     </header>

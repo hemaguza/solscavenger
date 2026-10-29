@@ -122,7 +122,7 @@ export async function scanDormantAccounts(
   const totalLamports = dormantList.reduce((acc, curr) => acc + curr.reclaimableLamports, 0);
   const totalSol = totalLamports / LAMPORTS_PER_SOL;
   // Estimated 10% fee mockup for visual calculation before backend confirms exact tx
-  const platformFee = totalSol * 0.025;
+  const platformFee = totalSol * 0.10;
   const userNetRefund = totalSol - platformFee;
   const estimatedUsd = totalSol * 150;
 

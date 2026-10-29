@@ -4,6 +4,7 @@ import './index.css';
 import App from './App.tsx';
 import { WalletContextProvider } from './context/WalletContextProvider';
 import { LanguageProvider } from './context/LanguageContext';
+import { MobileWalletProvider } from './context/MobileWalletContext';
 import { loadAppConfig } from './config/appConfig';
 
 loadAppConfig().finally(() => {
@@ -11,7 +12,9 @@ loadAppConfig().finally(() => {
     <StrictMode>
       <WalletContextProvider>
         <LanguageProvider>
-          <App />
+          <MobileWalletProvider>
+            <App />
+          </MobileWalletProvider>
         </LanguageProvider>
       </WalletContextProvider>
     </StrictMode>,

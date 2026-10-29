@@ -2,8 +2,9 @@ import type { FC } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { useLanguage } from '../context/LanguageContext';
+import { useMobileWallet } from '../context/MobileWalletContext';
 import { MascotIcon } from './MascotIcon';
-import { Sparkles, ArrowRight, Wallet, CheckCircle2 } from 'lucide-react';
+import { Sparkles, ArrowRight, Wallet, CheckCircle2, Smartphone } from 'lucide-react';
 
 interface LandingHeroProps {
   onScanClick?: () => void;
@@ -14,10 +15,15 @@ export const LandingHero: FC<LandingHeroProps> = ({ onScanClick, isScanning }) =
   const { t } = useLanguage();
   const { connected } = useWallet();
   const { setVisible } = useWalletModal();
+  const { shouldUseMobileFlow, openMobileModal } = useMobileWallet();
 
   const handleCtaClick = () => {
     if (!connected) {
-      setVisible(true);
+      if (shouldUseMobileFlow) {
+        openMobileModal();
+      } else {
+        setVisible(true);
+      }
     } else if (onScanClick) {
       onScanClick();
     }
@@ -89,6 +95,22 @@ export const LandingHero: FC<LandingHeroProps> = ({ onScanClick, isScanning }) =
           <CheckCircle2 className="w-4 h-4 text-[#00FFA3]" />
           <span>{t.hero.supportedWallets}</span>
         </div>
+
+        {/* Mobile Deep Link Banner / Hint */}
+        {shouldUseMobileFlow && (
+          <div className="mt-5 inline-flex flex-col sm:flex-row items-center gap-2 px-4 py-2.5 rounded-2xl bg-[#1a1b24] border border-[#9945FF]/40 text-xs text-slate-300 shadow-lg shadow-[#9945FF]/10 max-w-lg mx-auto">
+            <div className="flex items-center gap-2">
+              <Smartphone className="w-4 h-4 text-[#00FFA3] shrink-0" />
+              <span>{t.mobileBanner.text}</span>
+            </div>
+            <button
+              onClick={openMobileModal}
+              className="px-3 py-1 rounded-full bg-gradient-to-r from-[#9945FF] to-[#00FFA3] text-black font-extrabold text-[11px] hover:opacity-90 transition-opacity cursor-pointer whitespace-nowrap"
+            >
+              {t.mobileBanner.action} →
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

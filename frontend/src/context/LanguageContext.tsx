@@ -107,6 +107,22 @@ interface Translations {
     byNeihec: string;
     builtOn: string;
   };
+  mobileModal: {
+    title: string;
+    subtitle: string;
+    openPhantom: string;
+    phantomDesc: string;
+    openSolflare: string;
+    solflareDesc: string;
+    copyLink: string;
+    linkCopied: string;
+    copyLinkDesc: string;
+    continueAnyway: string;
+  };
+  mobileBanner: {
+    text: string;
+    action: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -215,6 +231,22 @@ const translations: Record<Language, Translations> = {
       byNeihec: 'by Neihec',
       builtOn: 'Built on Solana',
     },
+    mobileModal: {
+      title: 'CONNECT ON MOBILE',
+      subtitle: 'Standard mobile browsers (Safari / Chrome) do not support wallet extensions. Open SolScavenger directly in your wallet app:',
+      openPhantom: 'Open in Phantom',
+      phantomDesc: 'Recommended for iOS & Android',
+      openSolflare: 'Open in Solflare',
+      solflareDesc: 'Solana native mobile wallet',
+      copyLink: 'Copy SolScavenger Link',
+      linkCopied: 'Link Copied to Clipboard!',
+      copyLinkDesc: 'Paste into any Web3 mobile wallet browser',
+      continueAnyway: 'Using a mobile browser with extensions? Click here',
+    },
+    mobileBanner: {
+      text: 'Browsing on mobile? Open SolScavenger directly in Phantom for 1-click connection.',
+      action: 'Open in Phantom',
+    },
   },
   es: {
     nav: {
@@ -320,6 +352,22 @@ const translations: Record<Language, Translations> = {
       rights: '© 2026 SolScavenger',
       byNeihec: 'by Neihec',
       builtOn: 'Construido en Solana',
+    },
+    mobileModal: {
+      title: 'CONECTAR EN CELULAR',
+      subtitle: 'Los navegadores móviles estándar (Safari / Chrome) no admiten extensiones. Abre SolScavenger directamente en tu aplicación de wallet:',
+      openPhantom: 'Abrir en Phantom',
+      phantomDesc: 'Recomendado para iOS y Android',
+      openSolflare: 'Abrir en Solflare',
+      solflareDesc: 'Billetera nativa de Solana',
+      copyLink: 'Copiar enlace de SolScavenger',
+      linkCopied: '¡Enlace copiado al portapapeles!',
+      copyLinkDesc: 'Pégalo en el navegador de cualquier app Web3',
+      continueAnyway: '¿Usas un navegador móvil con extensiones? Haz clic aquí',
+    },
+    mobileBanner: {
+      text: '¿Navegando desde el celular? Abre SolScavenger directo en Phantom para conectar en 1 clic.',
+      action: 'Abrir en Phantom',
     },
   },
 };

@@ -7,6 +7,7 @@ import { HowItWorks } from './components/HowItWorks';
 import { ScannerView } from './components/ScannerView';
 import { FaqSection } from './components/FaqSection';
 import { SuccessModal } from './components/SuccessModal';
+import { MobileWalletModal } from './components/MobileWalletModal';
 import { Footer } from './components/Footer';
 import type { ScanSummary, ReclaimResult } from './types';
 import { scanDormantAccounts } from './services/solanaService';
@@ -73,6 +74,8 @@ export default function App() {
       </main>
 
       <Footer />
+
+      <MobileWalletModal />
 
       {reclaimResult && (
         <SuccessModal result={reclaimResult} onClose={handleModalClose} />
